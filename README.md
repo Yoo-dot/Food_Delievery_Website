@@ -27,7 +27,7 @@ Visit the site at: [https://yoo-dot.github.io/Food_Delievery_Website/](https://y
 
 Designed and developed by **Shreyanshi**, with inspiration from Japanese culture and culinary aesthetics.
 
-## 📬 Contact
+## Contact
 
 Got feedback or want to collaborate? Reach out via  [GitHub](https://github.com/yoo-dot).
 
