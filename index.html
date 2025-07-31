@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sakura Eats - Japanese Food Delivery</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo">🍣 Sakura Eats</div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#restaurants">Restaurants</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="header-actions">
+            <button class="cart-btn" id="open-cart">🛒 <span id="cart-count">0</span></button>
+            <button class="login-btn" id="open-login">Login</button>
+        </div>
+    </header>
+    <section class="hero" id="home">
+        <h1>Authentic Japanese Cuisine, Delivered to You</h1>
+        <p>Experience the taste of Japan from the comfort of your home with Sakura Eats</p>
+        <div class="fact-section">
+            <button class="fact-btn" onclick="showRandomFact()">Did You Know?</button>
+            <div id="fact-display" class="fact-display">
+                <p>Click to learn something amazing about Japan!</p>
+            </div>
+        </div>
+    </section>
+    <section class="featured" id="restaurants">
+        <h2>Featured Japanese Restaurants</h2>
+        <div class="restaurant-list">
+            <div class="restaurant-card" data-name="Sakura Sushi" data-description="Sakura Sushi offers traditional sushi and sashimi, crafted by master chefs using the freshest ingredients. Enjoy a wide variety of rolls, nigiri, and specialty dishes in a serene atmosphere.">
+                <img src="rest1.webp" alt="Sushi Restaurant">
+                <h3>Sakura Sushi</h3>
+                <p>Traditional sushi and sashimi crafted by master chefs</p>
+            </div>
+            <div class="restaurant-card" data-name="Ramen Ichiban" data-description="Ramen Ichiban serves hearty bowls of ramen with rich, flavorful broths, tender noodles, and a variety of delicious toppings. Perfect for a comforting meal any day.">
+                <img src="rest2.avif" alt="Ramen Restaurant">
+                <h3>Ramen Ichiban</h3>
+                <p>Hearty bowls of ramen with rich, flavorful broths</p>
+            </div>
+            <div class="restaurant-card" data-name="Tempura House" data-description="Tempura House specializes in light and crispy tempura, freshly fried to perfection. Enjoy shrimp and seasonal vegetables in a delicate, golden batter.">
+                <img src="rest3.avif" alt="Tempura Restaurant">
+                <h3>Tempura House</h3>
+                <p>Light and crispy tempura, freshly fried to perfection</p>
+            </div>
+        </div>
+    </section>
+    <section class="menu-highlights" id="menu">
+        <h2>Popular Japanese Dishes</h2>
+        <div class="menu-list">
+            <div class="menu-item" data-name="Deluxe Sushi Set" data-price="24.99" data-description="Assorted nigiri and maki rolls with fresh wasabi and ginger">
+                <img src="sushi.webp" alt="Sushi Set">
+                <h4>Deluxe Sushi Set</h4>
+                <p>Assorted nigiri and maki rolls with fresh wasabi and ginger</p>
+                <div class="menu-item-footer">
+                    <span class="price">$24.99</span>
+                    <button class="add-to-cart-btn" onclick="addToCart('Deluxe Sushi Set', 24.99, 'sushi.webp')">Add to Cart</button>
+                </div>
+            </div>
+            <div class="menu-item" data-name="Tonkotsu Ramen" data-price="18.99" data-description="Creamy pork broth, chashu, soft-boiled egg, and noodles">
+                <img src="ramen.avif" alt="Ramen Bowl">
+                <h4>Tonkotsu Ramen</h4>
+                <p>Creamy pork broth, chashu, soft-boiled egg, and noodles</p>
+                <div class="menu-item-footer">
+                    <span class="price">$18.99</span>
+                    <button class="add-to-cart-btn" onclick="addToCart('Tonkotsu Ramen', 18.99, 'ramen.avif')">Add to Cart</button>
+                </div>
+            </div>
+            <div class="menu-item" data-name="Tempura Platter" data-price="16.99" data-description="Shrimp and seasonal vegetables in a light, crispy batter">
+                <img src="tempura.avif" alt="Tempura">
+                <h4>Tempura Platter</h4>
+                <p>Shrimp and seasonal vegetables in a light, crispy batter</p>
+                <div class="menu-item-footer">
+                    <span class="price">$16.99</span>
+                    <button class="add-to-cart-btn" onclick="addToCart('Tempura Platter', 16.99, 'tempura.avif')">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal-overlay" style="display:none;">
+        <div class="modal">
+            <button class="close-modal" id="close-login">&times;</button>
+            <h2>Login to Sakura Eats</h2>
+            <form class="login-form">
+                <label for="login-email">Email</label>
+                <input type="email" id="login-email" name="email" required>
+                <label for="login-password">Password</label>
+                <input type="password" id="login-password" name="password" required>
+                <button type="submit" class="cta-btn">Login</button>
+            </form>
+        </div>
+    </div>
+    <!-- Restaurant Description Modal -->
+    <div id="restaurant-modal" class="modal-overlay" style="display:none;">
+        <div class="modal">
+            <button class="close-modal" id="close-restaurant">&times;</button>
+            <h2 id="restaurant-modal-title"></h2>
+            <p id="restaurant-modal-description"></p>
+        </div>
+    </div>
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="modal-overlay" style="display:none;">
+        <div class="modal cart-modal">
+            <button class="close-modal" id="close-cart">&times;</button>
+            <h2>Your Cart</h2>
+            <div id="cart-items" class="cart-items">
+                <!-- Cart items will be dynamically added here -->
+            </div>
+            <div class="cart-footer">
+                <div class="cart-total">
+                    <strong>Total: $<span id="cart-total">0.00</span></strong>
+                </div>
+                <button class="cta-btn checkout-btn" onclick="checkout()">Checkout</button>
+            </div>
+        </div>
+    </div>
+    <footer id="contact">
+        <p>&copy; 2024 Sakura Eats. All rights reserved.</p>
+        <div class="social-links">
+            <a href="#">Instagram</a> |
+            <a href="#">Facebook</a> |
+            <a href="#">Twitter</a>
+        </div>
+    </footer>
+    <script>
+    // Japanese facts array
+    const japaneseFacts = [
+        "Japan has over 5.5 million vending machines - that's one for every 23 people!",
+        "The Japanese word 'tsundoku' means buying books but never reading them.",
+        "In Japan, it's considered rude to tip at restaurants.",
+        "Japanese trains are so punctual that if they're 5 minutes late, it's considered a delay.",
+        "Japan has more than 200 volcanoes, with about 60 being active.",
+        "The Japanese word 'komorebi' describes sunlight filtering through trees.",
+        "Japan has the world's oldest company - a construction company founded in 578 AD.",
+        "In Japan, you can buy hot coffee in vending machines.",
+        "The Japanese word 'shinrin-yoku' means 'forest bathing' - spending time in nature.",
+        "Japan has over 3,000 McDonald's restaurants - the most outside the US.",
+        "The Japanese word 'wabi-sabi' celebrates imperfection and transience.",
+        "Japan has the world's shortest escalator - only 5 steps in Kawasaki.",
+        "The Japanese word 'ikigai' means 'reason for being' or purpose in life.",
+        "Japan has more than 6,800 islands.",
+        "The Japanese word 'kintsugi' is the art of repairing broken pottery with gold."
+    ];
+
+    let currentFactIndex = 0;
+
+    function showRandomFact() {
+        const factDisplay = document.getElementById('fact-display');
+        const randomIndex = Math.floor(Math.random() * japaneseFacts.length);
+        currentFactIndex = randomIndex;
+        
+        factDisplay.innerHTML = `
+            <p class="fact-text">${japaneseFacts[randomIndex]}</p>
+        `;
+        
+        // Add animation class
+        factDisplay.classList.add('fact-animate');
+        setTimeout(() => {
+            factDisplay.classList.remove('fact-animate');
+        }, 500);
+    }
+
+    // Cart functionality
+    let cart = [];
+    let cartTotal = 0;
+
+    function addToCart(name, price, image) {
+        const existingItem = cart.find(item => item.name === name);
+        
+        if (existingItem) {
+            existingItem.quantity += 1;
+        } else {
+            cart.push({
+                name: name,
+                price: price,
+                image: image,
+                quantity: 1
+            });
+        }
+        
+        updateCartDisplay();
+        showCartNotification();
+    }
+
+    function removeFromCart(index) {
+        cart.splice(index, 1);
+        updateCartDisplay();
+    }
+
+    function updateQuantity(index, change) {
+        cart[index].quantity += change;
+        if (cart[index].quantity <= 0) {
+            removeFromCart(index);
+        } else {
+            updateCartDisplay();
+        }
+    }
+
+    function updateCartDisplay() {
+        const cartItems = document.getElementById('cart-items');
+        const cartCount = document.getElementById('cart-count');
+        const cartTotalElement = document.getElementById('cart-total');
+        
+        cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
+        
+        cartItems.innerHTML = '';
+        cartTotal = 0;
+        
+        cart.forEach((item, index) => {
+            cartTotal += item.price * item.quantity;
+            cartItems.innerHTML += `
+                <div class="cart-item">
+                    <img src="${item.image}" alt="${item.name}">
+                    <div class="cart-item-details">
+                        <h4>${item.name}</h4>
+                        <p>$${item.price.toFixed(2)}</p>
+                    </div>
+                    <div class="cart-item-quantity">
+                        <button onclick="updateQuantity(${index}, -1)">-</button>
+                        <span>${item.quantity}</span>
+                        <button onclick="updateQuantity(${index}, 1)">+</button>
+                    </div>
+                    <button class="remove-item" onclick="removeFromCart(${index})">&times;</button>
+                </div>
+            `;
+        });
+        
+        cartTotalElement.textContent = cartTotal.toFixed(2);
+    }
+
+    function showCartNotification() {
+        // Create a temporary notification
+        const notification = document.createElement('div');
+        notification.className = 'cart-notification';
+        notification.textContent = 'Added to cart!';
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.remove();
+        }, 2000);
+    }
+
+    function checkout() {
+        if (cart.length === 0) {
+            alert('Your cart is empty!');
+            return;
+        }
+        alert(`Order placed! Total: $${cartTotal.toFixed(2)}`);
+        cart = [];
+        updateCartDisplay();
+        document.getElementById('cart-modal').style.display = 'none';
+    }
+
+    // Modal open/close logic
+    document.getElementById('open-login').onclick = function() {
+        document.getElementById('login-modal').style.display = 'flex';
+    };
+    document.getElementById('close-login').onclick = function() {
+        document.getElementById('login-modal').style.display = 'none';
+    };
+    document.getElementById('open-cart').onclick = function() {
+        document.getElementById('cart-modal').style.display = 'flex';
+    };
+    document.getElementById('close-cart').onclick = function() {
+        document.getElementById('cart-modal').style.display = 'none';
+    };
+    window.onclick = function(event) {
+        var loginModal = document.getElementById('login-modal');
+        var cartModal = document.getElementById('cart-modal');
+        if (event.target === loginModal) {
+            loginModal.style.display = 'none';
+        }
+        if (event.target === cartModal) {
+            cartModal.style.display = 'none';
+        }
+    };
+    // Restaurant modal logic
+    document.querySelectorAll('.restaurant-card').forEach(function(card) {
+        card.addEventListener('click', function() {
+            document.getElementById('restaurant-modal-title').textContent = card.getAttribute('data-name');
+            document.getElementById('restaurant-modal-description').textContent = card.getAttribute('data-description');
+            document.getElementById('restaurant-modal').style.display = 'flex';
+        });
+    });
+    document.getElementById('close-restaurant').onclick = function() {
+        document.getElementById('restaurant-modal').style.display = 'none';
+    };
+    window.addEventListener('click', function(event) {
+        var modal = document.getElementById('restaurant-modal');
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+    </script>
+</body>
+</html> 
