@@ -17,10 +17,10 @@ Visit the site at: [https://yoo-dot.github.io/Food_Delievery_Website/](https://y
 
 ## Folder Structure
 
-├── index.html 
-├── styles.css
-├── japrest1.jpeg 
-├── japrest3.jpeg              
+├── index.html         
+├── styles.css         
+├── japrest1.jpeg       
+├── japrest3.jpeg                    
 ├── ramen.avif                 
 ├── rest1.webp                 
 ├── rest2.avif                 
