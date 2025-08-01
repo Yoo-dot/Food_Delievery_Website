@@ -15,6 +15,19 @@ Visit the site at: [https://yoo-dot.github.io/Food_Delievery_Website/](https://y
 -  Responsive images showcasing food items
 -  Simple and intuitive navigation
 
+## Folder Structure
+
+├── index.html                  # Main HTML file
+├── styles.css                  # CSS styles for the website
+├── japrest1.jpeg               # Japanese restaurant image 1
+├── japrest3.jpeg               # Japanese restaurant image 3
+├── ramen.avif                  # Ramen dish image
+├── rest1.webp                  # Restaurant image 1
+├── rest2.avif                  # Restaurant image 2
+├── rest3.avif                  # Restaurant image 3
+├── sushi.webp                  # Sushi dish image
+├── tempura.avif                # Tempura dish image
+
 
 ##  Tech Stack
 
